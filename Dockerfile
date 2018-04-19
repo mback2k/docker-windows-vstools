@@ -1,6 +1,8 @@
 # escape=`
 
-FROM mback2k/windows-sdk
+ARG BASE_TAG=win10_1709
+
+FROM mback2k/windows-sdk:${BASE_TAG}
 
 SHELL ["powershell", "-command"]
 
