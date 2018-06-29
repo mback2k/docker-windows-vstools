@@ -25,6 +25,6 @@ test_script:
   - ps: docker run --rm $env:DOCKER_PROJECT
 
 deploy_script:
-  - ps: docker login -u="$env:APPVEYOR_ACCOUNT_NAME" -p="$env:DOCKER_PASSWORD"
+  - ps: echo "$env:DOCKER_PASSWORD" | docker login --username "$env:APPVEYOR_ACCOUNT_NAME" --password-stdin
   - ps: docker push $env:DOCKER_PROJECT
   - ps: docker logout
