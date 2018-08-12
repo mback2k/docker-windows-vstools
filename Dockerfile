@@ -1,6 +1,6 @@
 # escape=`
 
-ARG BASE_TAG=win10_1709
+ARG BASE_TAG=win10_1803
 
 FROM mback2k/windows-sdk:${BASE_TAG}
 
