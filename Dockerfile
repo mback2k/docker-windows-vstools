@@ -11,11 +11,13 @@ RUN Invoke-WebRequest "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile 
     Remove-Item @('C:\Windows\Temp\*', 'C:\Users\*\Appdata\Local\Temp\*') -Force -Recurse; `
     Write-Host 'Checking PATH and INCLUDE ...'; `
     Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin'; `
-    Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include';
+    Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.*\include';
 
 RUN Write-Host 'Updating PATH and INCLUDE ...'; `
-    $env:PATH = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin;' + $env:PATH; `
-    $env:INCLUDE = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include;' + $env:INCLUDE; `
+    $add_PATH = Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin'; `
+    $add_INCLUDE = Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.*\include'; `
+    $env:PATH = $add_PATH.FullName + ";" + $env:PATH; `
+    $env:INCLUDE = $add_INCLUDE.FullName + ";" + $env:INCLUDE; `
     [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::Machine); `
     [Environment]::SetEnvironmentVariable('INCLUDE', $env:INCLUDE, [EnvironmentVariableTarget]::Machine);
 
