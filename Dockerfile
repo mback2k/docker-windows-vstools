@@ -16,8 +16,8 @@ RUN Invoke-WebRequest "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile 
 RUN Write-Host 'Updating PATH and INCLUDE ...'; `
     $add_PATH = Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin'; `
     $add_INCLUDE = Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.*\include'; `
-    $env:PATH = $add_PATH.FullName + ";" + $env:PATH; `
-    $env:INCLUDE = $add_INCLUDE.FullName + ";" + $env:INCLUDE; `
+    $env:PATH = $add_PATH.FullName + ';' + $env:PATH; `
+    $env:INCLUDE = $add_INCLUDE.FullName + ';' + $env:INCLUDE; `
     [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::Machine); `
     [Environment]::SetEnvironmentVariable('INCLUDE', $env:INCLUDE, [EnvironmentVariableTarget]::Machine);
 
