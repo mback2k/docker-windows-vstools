@@ -7,7 +7,7 @@ environment:
 
   matrix:
     - DOCKER_FILE: Dockerfile
-      DOCKER_TAG: vs14_ltsc2016
+      DOCKER_TAG: ltsc2016
       BASE_TAG: win10_ltsc2016
 
 install:
