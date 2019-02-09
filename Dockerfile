@@ -1,8 +1,8 @@
 # escape=`
 
-ARG BASE_TAG=win10_1803
+ARG BASE_TAG=1803
 
-FROM mback2k/windows-sdk:${BASE_TAG}
+FROM mback2k/windows-base:${BASE_TAG}
 
 SHELL ["powershell", "-command"]
 
