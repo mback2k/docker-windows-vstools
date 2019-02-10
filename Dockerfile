@@ -7,7 +7,10 @@ FROM mback2k/windows-base:${BASE_TAG}
 SHELL ["powershell", "-command"]
 
 RUN Invoke-WebRequest "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile "C:\Windows\Temp\vs_buildtools.exe"; `
-    Start-Process -FilePath "C:\Windows\Temp\vs_buildtools.exe" -ArgumentList --quiet, --add, Microsoft.VisualStudio.Workload.VCTools, --nocache, --wait -NoNewWindow -PassThru -Wait; `
+    Start-Process -FilePath "C:\Windows\Temp\vs_buildtools.exe" -ArgumentList --quiet, `
+                  --add, Microsoft.VisualStudio.Workload.VCTools, `
+                  --add, Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop, `
+                  --nocache, --wait -NoNewWindow -PassThru -Wait; `
     Remove-Item @('C:\Windows\Temp\*', 'C:\Users\*\Appdata\Local\Temp\*') -Force -Recurse; `
     Write-Host 'Checking PATH and INCLUDE ...'; `
     Get-Item -Path 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin'; `
