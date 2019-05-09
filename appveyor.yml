@@ -8,7 +8,7 @@ environment:
   matrix:
     - DOCKER_FILE: Dockerfile
       DOCKER_TAG: ltsc2016
-      BASE_TAG: win10_ltsc2016
+      BASE_TAG: ltsc2016
 
 install:
   - ps: Write-Host Server version $(gp 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').BuildLabEx
