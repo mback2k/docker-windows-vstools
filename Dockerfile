@@ -4,8 +4,6 @@ ARG BASE_TAG=1803
 
 FROM mback2k/windows-base:${BASE_TAG}
 
-SHELL ["powershell", "-command"]
-
 RUN Invoke-WebRequest "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile "C:\Windows\Temp\vs_buildtools.exe"; `
     Start-Process -FilePath "C:\Windows\Temp\vs_buildtools.exe" -ArgumentList --quiet, `
                   --add, Microsoft.VisualStudio.Workload.VCTools, `
@@ -22,5 +20,3 @@ RUN Write-Host 'Updating PATH and INCLUDE ...'; `
     $env:INCLUDE = $add_INCLUDE.FullName + ';' + $env:INCLUDE; `
     [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::Machine); `
     [Environment]::SetEnvironmentVariable('INCLUDE', $env:INCLUDE, [EnvironmentVariableTarget]::Machine);
-
-CMD ["powershell"]
