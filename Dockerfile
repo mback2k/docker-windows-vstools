@@ -7,6 +7,7 @@ FROM mback2k/windows-base:${BASE_TAG}
 RUN Invoke-WebRequest "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile "C:\Windows\Temp\vs_buildtools.exe"; `
     Start-Process -FilePath "C:\Windows\Temp\vs_buildtools.exe" -ArgumentList --quiet, `
                   --add, Microsoft.VisualStudio.Workload.VCTools, `
+                  --add, Microsoft.Component.ClickOnce.MSBuild, `
                   --nocache, --norestart, --wait -NoNewWindow -PassThru -Wait; `
     Remove-Item @('C:\Windows\Temp\*', 'C:\Users\*\Appdata\Local\Temp\*') -Force -Recurse; `
     Write-Host 'Checking PATH and INCLUDE ...'; `
